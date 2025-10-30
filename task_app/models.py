@@ -5,11 +5,15 @@ from user_app.models import User
 
 class TaskModel(models.Model):
 
-    user = models.ForeignKey(to=User,on_delete=models.CASCADE)
+    priority_choices = [('high','High'),
+                        ('low','Low')]
+    
 
-    task_name = models.CharField(max_length=20)
+    priority = models.CharField(max_length=30, choices=priority_choices)
 
-    priority = models.Choices("high","low")
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    task_name = models.CharField(max_length=60)
 
     created_date =models.DateTimeField(auto_now_add=True)
 

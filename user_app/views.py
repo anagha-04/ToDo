@@ -7,7 +7,10 @@ from user_app.forms import UserregisterForm
 
 from user_app.models import User
 
-from django.contrib.auth import aauthenticate,login,logout
+from django.contrib.auth import authenticate,login,logout
+
+from task_app.models import TaskModel
+
 
 # view: registration view
 
@@ -63,7 +66,7 @@ class LoginView(View):
 
         password = request.POST.get('password')
 
-        user = aauthenticate(request,username=username,password=password)
+        user = authenticate(request,username=username,password=password)
 
         if user:
 
@@ -84,4 +87,14 @@ class LogoutView(View):
         logout(request)
 
         return redirect("login")
+    
+
+class BaseView(View):
+
+    def get(self,request):
+
+        task = TaskModel.objects.filter(user = request.user)
+
+        return render(request,"home.html",{"task":task})
+    
 
