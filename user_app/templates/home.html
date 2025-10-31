@@ -94,7 +94,7 @@
             <td>{{ t.task_name }}</td>
             <td>{{ t.priority }}</td>
             <td>
-              {% if t.is_complete %}
+              {% if t.is_completed %}
                 <span class="badge badge-complete">Completed</span>
               {% else %}
                 <span class="badge badge-pending">Pending</span>
@@ -103,6 +103,7 @@
             <td>
               <a href="{% url 'task_update' t.id %}" class="btn btn-sm btn-edit">Edit</a>
               <a href="{% url 'task_delete' t.id %}" class="btn btn-sm btn-delete">Delete</a>
+              <a href="{% url 'complete' t.id %}" class="btn btn-sm btn-complete">Completed</a>
             </td>
           </tr>
           {% endfor %}

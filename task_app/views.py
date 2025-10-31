@@ -74,3 +74,17 @@ class TaskDelete(View):
         task.delete()
 
         return redirect("home")
+
+class TaskComplete(View):
+
+    def get(self,request,**kwargs):
+
+        id = kwargs.get("pk")
+
+        task = get_object_or_404(TaskModel,id = id,user= request.user)
+
+        task.is_completed = True
+
+        task.save()
+
+        return redirect("home")

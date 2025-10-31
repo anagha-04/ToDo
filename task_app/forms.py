@@ -8,4 +8,4 @@ class TaskForm(forms.ModelForm):
 
         model = TaskModel
                 
-        fields =["task_name","priority", "is_completed"]
+        fields =["task_name","priority"]
