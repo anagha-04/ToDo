@@ -12,6 +12,8 @@ from django.urls import reverse_lazy
 
 from django.shortcuts import get_object_or_404
 
+from django.db.models import Q
+
 #add task view
 
 class AddTaskView(View):
@@ -88,3 +90,23 @@ class TaskComplete(View):
         task.save()
 
         return redirect("home")
+    
+
+class TaskSearchView(View):
+
+    template_name = "task_search.html"
+    
+    def get(self,request):
+
+        query = request.GET.get("q") #food
+
+        #filtering all expense of the logined user
+
+        task = TaskModel.objects.filter(user = request.user)
+
+        if query:
+
+             task= task.filter(Q(task_name__icontains = query) | Q(priority__icontains = query))
+
+        return render (request,self.template_name,{"task": task})
+        
