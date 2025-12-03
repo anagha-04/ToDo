@@ -46,7 +46,7 @@ class RegisterView(View):
         
         form = UserregisterForm()
 
-        return render(request,'sign_up.html',{'form':form})
+        return render(request,'login.html',{'form':form})
     
     #loginView
 
@@ -72,7 +72,7 @@ class LoginView(View):
 
             login(request,user)
 
-            return redirect("signup")
+            return redirect("home")
         
         return render(request,"login.html")
     
@@ -86,15 +86,23 @@ class LogoutView(View):
 
         logout(request)
 
-        return redirect("login")
+        return redirect("home")
+    
+
+
     
 
 class BaseView(View):
 
     def get(self,request):
+       
+       if request.user.is_authenticated:
 
-        task = TaskModel.objects.filter(user = request.user)
+          task = TaskModel.objects.filter(user = request.user) #object
 
-        return render(request,"home.html",{"task":task})
-    
+        #collection of objects (object1,object2,object3)
+ 
 
+          return render(request,"home.html",{"task":task})
+       
+       return render(request,"home.html")

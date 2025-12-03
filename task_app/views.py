@@ -40,7 +40,7 @@ class AddTaskView(View):
 
             task.save()
 
-        return render(request,"add_task.html",{"form":form})
+        return redirect("home")
     
 class TaskList(View):
 
