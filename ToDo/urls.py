@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from user_app.views import *
 from task_app.views import *
+from API.views import*
 
 
 urlpatterns = [
@@ -32,7 +33,7 @@ urlpatterns = [
     path('delete/<int:pk>',TaskDelete.as_view(),name='task_delete'),
     path('complete/<int:pk>',TaskComplete.as_view(),name ="complete"),
     path('search/',TaskSearchView.as_view(),name="search"),
-
+    path('list/',UserListCreateView.as_view(),name="list"),
    
     
 ]
