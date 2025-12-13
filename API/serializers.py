@@ -1,8 +1,7 @@
-from django.contrib.auth.models import User
 from rest_framework import serializers
+from django.contrib.auth.models import User
 
-
-class UserRegisterSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
 
     password = serializers.CharField(write_only=True)
 
@@ -12,20 +11,16 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
         fields = ['username', 'first_name', 'last_name', 'email', 'password']
 
-    def create(self, validated_data):
+    def create(self, validated_data): 
 
-        user = User.objects.create_user(
-
-                        username=validated_data['username'],
-
-                        first_name=validated_data.get('first_name'),
-
-                        last_name=validated_data.get('last_name'),
-
-                       email=validated_data.get('email'),
-
-                        password=validated_data['password']  # Password gets hashed automatically
-        
+        user = User(
+            username=validated_data['username'],
+            first_name=validated_data.get('first_name', ''),
+            last_name=validated_data.get('last_name', ''),
+            email=validated_data.get('email', '')
         )
-        
+        user.set_password(validated_data['password'])  # password encrypted
+
+        user.save()
+
         return user

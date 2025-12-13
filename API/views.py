@@ -9,12 +9,9 @@ from API.serializers import UserRegisterSerializer
 
 class UserRegisterView(APIView):
 
-    def get(self,request):
-
+    def get(self, request):
         users = User.objects.all()
-
-        serializer = UserRegisterSerializer(users,many =True)
-
+        serializer = UserRegisterSerializer(users, many=True)  
         return Response(serializer.data)
     
     # def post(self,request):
