@@ -1,30 +1,29 @@
 from django.shortcuts import render
+
+# Create your views here.
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.models import User
-from rest_framework.views import APIView
-from API.serializers import UserSerializer
+from API.serializers import UserRegisterSerializer
 
-# Create your views here.
+class UserRegisterView(APIView):
 
-class UserListCreateView(APIView):
-
-  def get(self, request):
+    def get(self,request):
 
         users = User.objects.all()
 
-        serializer = UserSerializer(users, many=True)
+        serializer = UserRegisterSerializer(users,many =True)
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data)
+    
+    # def post(self,request):
 
-    # def post(self, request):
-
-    #     # Register a new user
-    #     serializer = UserSerializer(data=request.data)
+    #     serializer = UserRegisterSerializer(data = request.data)
 
     #     if serializer.is_valid():
 
-    #         serializer.save()  # password is hashed in serializer
+    #         serializer.save()    
 
     #         return Response(status=status.HTTP_201_CREATED)
         
