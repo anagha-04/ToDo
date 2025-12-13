@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 
 
 
-class CreateUserAPI(APIView):
+class UserRegisterApi(APIView):
 
     def get(self, request):
 
@@ -17,7 +17,7 @@ class CreateUserAPI(APIView):
 
         serializer = UserSerializer(users, many=True)
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data)
 
     def post(self, request):
 
@@ -27,6 +27,6 @@ class CreateUserAPI(APIView):
 
             serializer.save()  
 
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(status=status.HTTP_201_CREATED)
         
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST)

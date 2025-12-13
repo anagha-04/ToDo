@@ -33,7 +33,7 @@ urlpatterns = [
     path('delete/<int:pk>',TaskDelete.as_view(),name='task_delete'),
     path('complete/<int:pk>',TaskComplete.as_view(),name ="complete"),
     path('search/',TaskSearchView.as_view(),name="search"),
-    path('user_api/', CreateUserAPI.as_view(), name='userapi'),
+    path('user_api/', UserRegisterApi.as_view(), name='userapi'),
    
     
 ]
