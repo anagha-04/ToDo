@@ -32,7 +32,7 @@ class UserRegisterApi(APIView):
         
         return Response(status=status.HTTP_400_BAD_REQUEST)
     
-class ReteievUpadateDeleteViwe(APIView):
+class ReteievUpadateDeleteView(APIView):
 
     def get(self, request, **kwargs):
 
